@@ -36,13 +36,6 @@
             <outputDirectory>/</outputDirectory>
 <!--            <includes>-->
 <!--                <include>com.typesafe:config</include>-->
-<!--                <include>com.alibaba:*</include>-->
-<!--                <include>org.dom4j:*</include>-->
-<!--                <include>jaxen:*</include>-->
-<!--                <include>org.elasticsearch*:*</include>-->
-<!--                <include>org.apache.http*:*</include>-->
-<!--                <include>org.apache.lucene*:*</include>-->
-<!--                <include>org.apache.logging.log4j:log4j-api</include>-->
 <!--            </includes>-->
             <unpack>true</unpack>
         </dependencySet>
