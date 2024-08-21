@@ -20,4 +20,10 @@ public class ConfigPojo {
 
     @Value("${bean.value:}")
     private Boolean value;
+
+    @Value("${http.url:}")
+    private String url;
+
+    @Value("${http.isOpen:}")
+    private Boolean isOpen;
 }
