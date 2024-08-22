@@ -40,4 +40,10 @@ public class TestController {
                 .build();
         return ftpHttpService.listFiles(conn, "/typ/excelUpload", "/api/v2/ftp/listFile");
     }
+
+    @ResponseBody
+    @GetMapping("/query")
+    public String queryData() {
+        return ftpHttpService.dbQuery("select * from bdp.ycfece788eff41c88e7692ed3e4e465c limit 10", "/db/query");
+    }
 }

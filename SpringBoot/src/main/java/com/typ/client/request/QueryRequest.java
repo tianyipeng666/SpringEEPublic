@@ -9,7 +9,6 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
-public class HttpRequest extends CommonRequest{
-    private String path;
-    private ConnectPojo connInfo;
+public class QueryRequest extends CommonRequest{
+    private String sql;
 }

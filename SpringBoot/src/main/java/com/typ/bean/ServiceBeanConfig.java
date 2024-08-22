@@ -27,6 +27,7 @@ public class ServiceBeanConfig {
         RestTemplate restTemplate = new RestTemplate();
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(
+                MediaType.APPLICATION_FORM_URLENCODED,
                 MediaType.APPLICATION_JSON_UTF8,
                 MediaType.TEXT_HTML,
                 MediaType.TEXT_PLAIN));

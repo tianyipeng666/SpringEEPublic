@@ -9,10 +9,9 @@ import lombok.ToString;
 import java.util.ArrayList;
 
 @Data
-@ToString
 //@NoArgsConstructor
 //@Builder, 带上该注解会导致序列化失败
-public class HttpResponse{
+public class HttpResponse extends CommonResponse{
     private Integer status;
     private String errorMsg;
     private ArrayList<FileInfo> files;
