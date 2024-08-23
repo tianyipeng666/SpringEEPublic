@@ -44,6 +44,6 @@ public class TestController {
     @ResponseBody
     @GetMapping("/query")
     public String queryData() {
-        return ftpHttpService.dbQuery("select * from bdp.ycfece788eff41c88e7692ed3e4e465c limit 10", "/db/query");
+        return ftpHttpService.dbQuery("show databases", "/db/query");
     }
 }

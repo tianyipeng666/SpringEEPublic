@@ -9,6 +9,7 @@ public final class JsonUtils {
 
     private static Gson gson = new Gson();
 
+
     private JsonUtils() {
 
     }
@@ -16,6 +17,7 @@ public final class JsonUtils {
     public static String toJSONString(Object obj) {
         return gson.toJson(obj);
     }
+
 
     public static <T> T parseObject(String json, Class<T> clazz) {
         return gson.fromJson(json, clazz);

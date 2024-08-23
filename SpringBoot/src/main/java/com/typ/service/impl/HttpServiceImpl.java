@@ -8,6 +8,7 @@ import com.typ.client.request.QueryRequest;
 import com.typ.client.response.HttpResponse;
 import com.typ.client.response.QueryResponse;
 import com.typ.service.HttpService;
+import com.typ.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,9 @@ public class HttpServiceImpl implements HttpService {
                     .connInfo(conn)
                     .path(path)
                     .build();
-            return client.executeRestFulRequest(request, requestPath, HttpResponse.class).toString();
+            HttpResponse httpResponse = JsonUtils.parseObject(client.executeRestFulRequest(request, requestPath, HttpResponse.class), HttpResponse.class);
+            log.info(httpResponse.getStatus().toString());
+            return httpResponse.toString();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -38,7 +41,9 @@ public class HttpServiceImpl implements HttpService {
         try {
             LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
             map.add("sql", sql);
-            return client.executeRequest(map, requestPath, QueryResponse.class).toString();
+            QueryResponse queryResponse = JsonUtils.parseObject(client.executeRequest(map, requestPath, QueryResponse.class), QueryResponse.class);
+            log.info(queryResponse.getStatus().toString());
+            return queryResponse.toString();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

@@ -31,7 +31,7 @@ public class HttpClient {
     @Qualifier("RestTemplateWithOtherType")
     private RestTemplate restTemplate;
 
-    public CommonResponse executeRestFulRequest(CommonRequest request, String requestPath, Class clazz) throws InterruptedException {
+    public String executeRestFulRequest(CommonRequest request, String requestPath, Class clazz) throws InterruptedException {
         // http请求
         String url = String.format("http://%s%s", config.getUrl(), requestPath);
         HttpHeaders headers = new HttpHeaders();
@@ -51,7 +51,7 @@ public class HttpClient {
             if (!body.getStatus().equals(0)) {
                 throw new RuntimeException("The some error happen, please refer to the log for details");
             } else {
-                return body;
+                return JsonUtils.toJSONString(body);
             }
         } else {
             if (responseEntity.getBody() != null) {
@@ -61,7 +61,7 @@ public class HttpClient {
         }
     }
 
-    public CommonResponse executeRequest(MultiValueMap map, String requestPath, Class clazz) throws InterruptedException {
+    public String executeRequest(MultiValueMap map, String requestPath, Class clazz) throws InterruptedException {
         // http请求
         String url = String.format("http://%s%s", config.getUrl(), requestPath);
         HttpHeaders headers = new HttpHeaders();
@@ -83,7 +83,7 @@ public class HttpClient {
             if (!body.getStatus().equals(0)) {
                 throw new RuntimeException("The some error happen, please refer to the log for details");
             } else {
-                return body;
+                return JsonUtils.toJSONString(body);
             }
         } else {
             if (responseEntity.getBody() != null) {

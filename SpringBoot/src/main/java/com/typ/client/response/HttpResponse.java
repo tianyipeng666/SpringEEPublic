@@ -12,7 +12,6 @@ import java.util.ArrayList;
 //@NoArgsConstructor
 //@Builder, 带上该注解会导致序列化失败
 public class HttpResponse extends CommonResponse{
-    private Integer status;
     private String errorMsg;
     private ArrayList<FileInfo> files;
 }

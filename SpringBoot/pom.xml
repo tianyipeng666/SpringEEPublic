@@ -41,7 +41,12 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
+        <!-- fastJson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.32</version>
+        </dependency>
 
         <!-- Nacos, SpringCloud, 配置动态加载管理 -->
         <!-- springcloud需同springboot版本相匹配, 比如: ConfigurationBeanFactoryMetadata, RefreshBootstrapRegistryInitializer -->
