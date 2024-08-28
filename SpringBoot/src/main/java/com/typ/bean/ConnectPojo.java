@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 // 组合注解，包含@ToString、@EqualsAndHashCode、@Getter、@Setter、@RequiredArgsConstructor、@NoArgsConstructor
+// 需要全字段构建方法则需要添加@AllArgsConstructor注解
 @Data
 // 通过Build构建对象，但是如果重新赋值的话会重新构建对象，不会提供setter方法，需配合Data注解使用
 @Builder

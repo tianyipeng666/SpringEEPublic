@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @Slf4j
 @Component
 public class HttpServiceImpl implements HttpService {
@@ -42,6 +45,8 @@ public class HttpServiceImpl implements HttpService {
             LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
             map.add("sql", sql);
             QueryResponse queryResponse = JsonUtils.parseObject(client.executeRequest(map, requestPath, QueryResponse.class), QueryResponse.class);
+            Object[][] data = queryResponse.getData();
+            log.info("The return data length:" + data.length + ", and example data like:" + Arrays.stream(data[0]).collect(Collectors.toList()));
             log.info(queryResponse.getStatus().toString());
             return queryResponse.toString();
         } catch (InterruptedException e) {
