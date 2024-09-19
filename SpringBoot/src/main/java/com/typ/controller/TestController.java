@@ -46,4 +46,10 @@ public class TestController {
     public String queryData() {
         return ftpHttpService.dbQuery("show tables in `bdp` like '*'", "/db/query");
     }
+
+    @ResponseBody
+    @GetMapping("/count")
+    public String countRows() {
+        return ftpHttpService.countRows("bdp", "typtest4", 1726649479522L, "/taurus/tableRows");
+    }
 }

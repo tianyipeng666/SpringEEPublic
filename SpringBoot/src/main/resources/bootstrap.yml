@@ -2,6 +2,7 @@ spring:
   application:
     name: TYP-SpringBoot
   cloud:
+    # ./startup.sh -m standalone
     nacos:
       # 命名空间ID(注意不是命名空间名称)，用于环境隔离，可根据环境信息修改，用于统一注册和配置在一个namespace下
       namespace: 3bfe2033-83cd-4013-83cf-76cd970531da

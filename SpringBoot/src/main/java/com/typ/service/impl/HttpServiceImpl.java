@@ -7,6 +7,7 @@ import com.typ.client.request.HttpRequest;
 import com.typ.client.request.QueryRequest;
 import com.typ.client.response.HttpResponse;
 import com.typ.client.response.QueryResponse;
+import com.typ.client.response.TableRowsResponse;
 import com.typ.service.HttpService;
 import com.typ.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -47,6 +48,22 @@ public class HttpServiceImpl implements HttpService {
             QueryResponse queryResponse = JsonUtils.parseObject(client.executeRequest(map, requestPath, QueryResponse.class), QueryResponse.class);
             Object[][] data = queryResponse.getData();
             log.info("The return data length:" + data.length + ", and example data like:" + Arrays.stream(data[0]).collect(Collectors.toList()));
+            log.info(queryResponse.getStatus().toString());
+            return queryResponse.toString();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String countRows(String database, String tableName, Long lastUpdateTime, String requestPath) {
+        try {
+            LinkedMultiValueMap<String, Object> map = new LinkedMultiValueMap<>();
+            map.add("database", database);
+            map.add("tableName", tableName);
+            map.add("lastUpdateTime", lastUpdateTime);
+            TableRowsResponse queryResponse = JsonUtils.parseObject(client.executeRequest(map, requestPath, TableRowsResponse.class), TableRowsResponse.class);
+            log.info(queryResponse.toString());
             log.info(queryResponse.getStatus().toString());
             return queryResponse.toString();
         } catch (InterruptedException e) {
