@@ -1,6 +1,7 @@
-package com.typ.bean;
+package com.typ;
 
 
+import com.typ.client.HttpClient;
 import com.typ.client.converter.TemplateMappingJackson2HttpMessageConverter;
 import com.typ.service.HttpService;
 import com.typ.service.impl.HttpServiceImpl;
@@ -38,4 +39,10 @@ public class ServiceBeanConfig {
         // restTemplate.getMessageConverters().add(new TemplateMappingJackson2HttpMessageConverter());
         return restTemplate;
     }
+
+    @Bean
+    public HttpClient httpClient() {
+        return new HttpClient();
+    }
+
 }

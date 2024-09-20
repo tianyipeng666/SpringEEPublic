@@ -21,7 +21,6 @@ import java.util.Objects;
 
 @Slf4j
 // 指示某个类被Spring管理，包含@Repository、@Service、@Controller注解，同@Autowired组合使用实现自动注入
-@Component
 public class HttpClient {
 
     @Autowired
