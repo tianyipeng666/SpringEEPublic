@@ -1,8 +1,7 @@
 package com.typ.client.response;
 
 import com.typ.bean.FieldInfo;
-import com.typ.bean.FileInfo;
-import com.typ.bean.SchemaInfo;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;

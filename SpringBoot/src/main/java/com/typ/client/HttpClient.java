@@ -78,10 +78,14 @@ public class HttpClient {
             if (Objects.isNull(responseEntity.getBody())) {
                 throw new RuntimeException("服务端响应为空");
             }
+            // 可获取到status
             CommonResponse body = responseEntity.getBody();
+            log.info("[executeRequest MobiusCommonResponse]==>" + body.getStatus());
             if (!body.getStatus().equals(0)) {
                 throw new RuntimeException("The some error happen, please refer to the log for details");
             } else {
+                // 子类也可获取到status，但是toString由于@Data注解不能输出父类的属性
+                log.info("[executeRequest]==>" + responseEntity.getBody().toString());
                 return JsonUtils.toJSONString(body);
             }
         } else {
