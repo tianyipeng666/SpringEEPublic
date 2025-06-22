@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--
+            id：bean对象的id，唯一标识。一般是Bean对象的名称的首字母小写
+            class：bean对象的类路径
+    -->
+    <bean id="p" class="com.typ.pojo.Person"></bean>
+
+    <!-- 1.通过bean对象，给对象注入属性 来 配置数据库连接的数据源 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/sm?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8&amp;allowPublicKeyRetrieval=true"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+    </bean>
+
+    <!--2.配置SQLSessionFactory对象-->
+    <bean id="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--工厂依赖数据源，所以需要注入数据源对应的对象-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--配置别名-->
+        <property name="typeAliasesPackage" value="com.typ.pojo"></property>
+        <!--加入配置，解析mybatis.xml-->
+        <!-- <property name="configLocation" value="classpath:mybatis.xml"></property>-->
+    </bean>
+
+    <!--3.扫描UserMapper.xml文件-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--注入工厂对象-->
+        <property name="sqlSessionFactoryBeanName" value="factory"></property>
+        <!--扫描文件：-->
+        <property name="basePackage" value="com.typ.mapper"></property>
+    </bean>
+
+    <!--加入扫描注解所在的包：多个包用逗号分隔开-->
+    <context:component-scan base-package="com.typ.service,com.typ.mapper"></context:component-scan>
+    <!--加入properties文件的扫描，扫描以后，spring容器中就会有一处专门存放applicationConf.properties中的键值对-->
+    <context:property-placeholder location="classpath:applicationConf.properties"></context:property-placeholder>
+
+</beans>
