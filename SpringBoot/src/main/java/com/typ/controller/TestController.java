@@ -44,7 +44,7 @@ public class TestController {
     @ResponseBody
     @GetMapping("/query")
     public String queryData() {
-        return ftpHttpService.dbQuery("show tables in `bdp` like '*'", "/db/query");
+        return ftpHttpService.dbQuery("show tables in `bdp_test` like '*'", "/db/query");
     }
 
     @ResponseBody
