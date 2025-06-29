@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Component注解的作用：简化了applicationContext.xml中对这个创建对象的配置 ，而创建对象这件事还是spring来管理。
  * 帮我们构建对象，默认的名字就是类名的首字母小写： UserServiceImpl  ---》 userServiceImpl
@@ -33,6 +35,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User selectOneUser(String uname, String pwd) {
         return userMapper.selectOneUser(uname,pwd);
+    }
+
+    @Override
+    public int saveUser(User user) {
+        System.out.println("调用到service层");
+        System.out.println(user);
+        return userMapper.insertUser(user);
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userMapper.selectAllUsers();
     }
 
 }

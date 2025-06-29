@@ -42,11 +42,43 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+        <!-- 依赖了Spring框架核心功能的5个依赖以及Spring整合Web的依赖spring-web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>6.0.11</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet.jsp</groupId>
+            <artifactId>jakarta.servlet.jsp-api</artifactId>
+            <version>3.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>5.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--Jackson作为JSON转换工具，把java对象进行json转化，-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.2</version>
+        </dependency>
+
+
         <!--添加springContext依赖-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>6.0.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.9.1</version>
+            <!--<scope>runtime</scope>-->
         </dependency>
         <!-- springJdbc依赖-->
         <dependency>
@@ -54,13 +86,18 @@
             <artifactId>spring-jdbc</artifactId>
             <version>6.0.5</version>
         </dependency>
+        <!--数据库连接池：c3p0-->
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.5</version>
+        </dependency>
         <!-- spring整合mybatis的依赖  -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>3.0.1</version>
         </dependency>
-
         <!-- mybatis的依赖  -->
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -73,6 +110,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.28</version>
         </dependency>
+
         <!-- log4j的依赖  -->
         <dependency>
             <groupId>org.slf4j</groupId>

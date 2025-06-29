@@ -6,4 +6,12 @@
     <select id="selectOneUser" resultType="user">
         select * from t_user where username=#{param1} and password=#{param2}
     </select>
+
+    <insert id="insertUser">
+        insert into table_user values (default,#{name},#{age},#{birthdate},#{filename},#{filetype})
+    </insert>
+
+    <select id="selectAllUsers" resultType="User">
+        select * from table_user
+    </select>
 </mapper>
