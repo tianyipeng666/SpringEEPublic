@@ -1,0 +1,113 @@
+server:
+  port: 8088
+  tomcat:
+    threads:
+      # 最大线程数(默认200)
+      max: 200
+      # 最小工作空闲线程数(默认10)
+      min-spare: 10
+    # 最大连接数  (默认10000)
+    max-connections: 1000
+    # 等待队列长度，默认(100)
+    accept-count: 100
+  compression:
+    enabled: true
+
+bean:
+  key: abc
+  value: true
+http:
+  url: https://example.com/api
+  isOpen: false
+
+spring:
+  cloud:
+    nacos:
+      config:
+        enabled: false
+    bootstrap:
+      enabled: false
+  application:
+    name: typ-SpringBoot
+  profiles:
+    active:
+      - '@profile.active@'
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    property-naming-strategy: SNAKE_CASE
+    deserialization:
+      fail-on-unknown-properties: false
+  aop:
+    proxy-target-class: true
+  redis:
+#    单节点
+#    prefix: typ-Spring
+#    database: 0
+#    host: bdp-redis
+#    port: 6679
+#    password: h1iz6i2dp4redis
+#    lettuce:
+#      pool:
+#        max-wait: 30000   # 连接池最大阻塞等待时间（使用负值表示没有限制）
+#        max-active: 100   # 连接池最大连接数（使用负值表示没有限制）
+#        max-idle: 20      # 连接池中的最大空闲连接
+#        min-idle: 0       # 连接池中的最小空闲连接
+#    timeout: 10000     # 连接超时
+
+    #  cluster
+    prefix: typ-Spring
+    database: 0
+    password: haizhi1234!
+    # 集群配置
+    cluster:
+      nodes: 192.168.1.84:7000,192.168.1.85:7000,192.168.1.86:7000
+    # 最大重定向次数
+    max-redirects: 3
+    lettuce:
+      pool:
+        max-wait: 30000   # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-active: 100   # 连接池最大连接数（使用负值表示没有限制）
+        max-idle: 20      # 连接池中的最大空闲连接
+        min-idle: 0       # 连接池中的最小空闲连接
+    timeout: 10000     # 连接超时
+
+  servlet:
+    multipart:
+      maxFileSize: 100MB
+      maxRequestSize: 100MB
+
+logging:
+  pattern:
+    console: ${CONSOLE_LOG_PATTERN:%clr(%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(${PID:- }){magenta} [${spring.application.name}] %clr([%10.10t]){faint}[%36.36X{trace_id}] %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}
+    # consoles:
+    # file: '${FILE_LOG_PATTERN:%d{${LOG_DATEFORMAT_PATTERN:yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:%5p} ${PID:- } [${spring.application.name}] [%t] [%X{trace_id}] %logger.%M.%L : %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}}'
+  file:
+    name: logs/${spring.application.name}.log
+  level:
+    com.typ: INFO
+    org.springframework.web: ERROR
+    org.springframework.orm: ERROR
+    org.springframework.scheduling: ERROR
+    org.springframework.data: INFO
+    org.springframework.data.redis.core.RedisConnectionUtils: INFO
+    org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport: ERROR
+    org.springframework.context: ERROR
+    org.hibernate: ERROR
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.engine.QueryParameters: INFO
+    org.hibernate.engine.query.HQLQueryPlan: INFO
+    org.apache.catalina: ERROR
+    com.zaxxer.hikari: ERROR
+
+
+# 错误相关的配置
+error:
+  # 加锁多长时间不成功，认定加锁失败, 单位毫秒
+  unlockTime: 120000
+  retryCnt: 3 # 错误重试次数
+  retrySleepTime: 1000 # 错误重试间隔时间，单位毫秒
+  # 错误信息的关键字 -> 重试次数
+  msgToRetry: "{'UnknownPartitioning':2, 'java.io.FileNotFoundException':2, 'org.apache.spark.shuffle.MetadataFetchFailedException':2, 'not found':2, 'AlreadyExistsException':2, 'Futures timed out':2, 'The client is stopped':2, 'ExecutorLostFailure':1, 'cannot resolve':1, 'stopped SparkContext':10, 'SparkContext was shut down':10, 'mobius is auto renewing':10}"

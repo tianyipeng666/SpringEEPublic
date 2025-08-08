@@ -4,6 +4,7 @@ package com.typ.controller;
 import com.typ.bean.ConfigPojo;
 import com.typ.bean.ConnectPojo;
 import com.typ.service.HttpService;
+import com.typ.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -51,5 +52,20 @@ public class TestController {
     @GetMapping("/count")
     public String countRows() {
         return ftpHttpService.countRows("bdp", "typtest4", 1726649479522L, "/taurus/tableRows");
+    }
+
+    @ResponseBody
+    @GetMapping("/redis")
+    public String redisTest() {
+        RedisUtils.setnx("springRedis", "1", 60);
+        RedisUtils.expire("springRedis", 80);
+        System.out.println(RedisUtils.getToInt("springRedis"));
+        RedisUtils.set("springRedis2", "2");
+        RedisUtils.del((RedisUtils.hasKey("springRedis")) ? "springRedis" : "springRedis2");
+        RedisUtils.rpush("springRedisQueueSource", "1");
+        RedisUtils.rpush("springRedisQueueSource", "2");
+        RedisUtils.rpush("springRedisQueueSource", "3");
+        RedisUtils.removeQueueMessage("springRedisQueueSource", "springRedisQueueTarget");
+        return "complete";
     }
 }
